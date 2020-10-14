@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar class="ios hydrated">
+    <ion-title class="ios title-ios hydrated">新增資料</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="bookingForm" (ngSubmit)="formSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col >
+          <ion-item>
+            <ion-label position="floating">奉獻者姓名</ion-label>
+            <ion-input formControlName="name" type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col >
+          <ion-item>
+            <ion-label position="floating">電話</ion-label>
+            <ion-input formControlName="mobile" type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col >
+          <ion-item>
+            <ion-label position="floating">E-mail:</ion-label>
+            <ion-input formControlName="email" type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>  
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">郵遞區號</ion-label>
+            <ion-input formControlName="address_number" type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">地址</ion-label>
+            <ion-input formControlName="address" type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">總金額</ion-label>
+            <ion-input formControlName="money" type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-list >
+          <ion-radio-group formControlName="option" required>
+            <ion-list-header>
+              <ion-label>祈求意象</ion-label>
+            </ion-list-header>
+        
+            <ion-item>
+              <ion-label>祈求平安康復</ion-label>
+              <ion-radio slot="start" value="祈求平安康復"></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>祈求事業順利</ion-label>
+              <ion-radio slot="start" value="祈求事業順利"></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>祈求學業進步</ion-label>
+              <ion-radio slot="start" value="祈求學業進步"></ion-radio>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label>祈求家庭和樂</ion-label>
+              <ion-radio slot="start" value="祈求家庭和樂"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>其他祈求意象,請在下方空格說明</ion-label>
+              <ion-radio slot="start" value="其他"></ion-radio>
+            </ion-item>
+
+          </ion-radio-group>
+        </ion-list>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea formControlName="other" type="text" ></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">送出</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  
+</ion-content>

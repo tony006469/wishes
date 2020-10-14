@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>print-receipt</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-grid>
+    <ion-row>
+      <ion-card id="capture">
+        <div >
+        <ion-text color="dark">
+          <p>奉獻者姓名 : {{name}}</p>
+          <p>電話 : {{mobile}}</p>
+          <p>E-mail : {{email}}</p>
+          <p>地址 : {{address}} {{address_number}}</p>
+          <p>奉獻金額 : {{money}}</p>
+          <p>祈求意象{{option}}</p>
+        </ion-text>
+        </div>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+  <div> <button class="btn btn-danger btn-block" (click)="generatePdf()">Download PDF</button></div>
+</ion-content>

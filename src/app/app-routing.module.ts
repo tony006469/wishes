@@ -11,6 +11,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'make-appointment',
+    loadChildren: () => import('./make-appointment/make-appointment.module').then( m => m.MakeAppointmentPageModule)
+  },
+  {
+    path: 'edit-appointment/:id',
+    loadChildren: () => import('./edit-appointment/edit-appointment.module').then( m => m.EditAppointmentPageModule)
+  },
+  {
+    path: 'print-receipt/:id',
+    loadChildren: () => import('./print-receipt/print-receipt.module').then( m => m.PrintReceiptPageModule)
+  },
 ];
 
 @NgModule({
