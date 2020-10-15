@@ -25,6 +25,8 @@ export class MakeAppointmentPage implements OnInit {
       address_number: [''],
       address: [''],
       money: [''],
+      create_date:[''],
+      expired_date:[''],
       option: [''],
       other:['']
     })
