@@ -44,93 +44,215 @@ export class PrintReceiptPage implements OnInit {
   }
 
   generatePdf() {
+    var today = new Date();
     const documentDefinition = {
-      header: [{ text: '財團法人天主教靈醫會 (聖嘉民朝聖地)', alignment: 'center' },
-      {
-        columns: [
-          { text: '收據', alignment: 'center',width: '*' },
-          { text: '聖嘉民____號', alignment: 'right',width: '*' },
-        ]
-      }
+      header: [
+        {
+          text: '財團法人天主教靈醫會 (聖嘉民朝聖地)',
+          alignment: 'center',
+          style: 'header'
+        }
       ],
-      footer: {
-        columns: [
-          { text: 'Right part', alignment: 'center' }
-        ]
-      },
       content: [
-        'This paragraph fills full width, as there are no columns. Next paragraph however consists of three columns',
         {
           columns: [
             {
-              // auto-sized columns have their widths based on their content
-              width: 'auto',
-              text: 'First column'
+              text: '          ',
+              fontSize: 20
             },
             {
-              // star-sized columns fill the remaining space
-              // if there's more than one star-column, available width is divided equally
-              width: '*',
-              text: 'Second column'
+              text: '收據',
+              alignment: 'center',
+              fontSize: 20
             },
             {
-              // fixed width
-              width: 100,
-              text: 'Third column'
+              text: '聖嘉民__號',
+              alignment: 'right',
+              fontSize: 20
+            },
+          ],margin: [ 0, 5, 0, 10]
+        },
+        {
+          text:'茲收到　　' + this.name + '　　君　　(連絡電話:' + this.mobile + ')',
+          style: 'content'
+        },
+        {
+          text:'地址：' + this.address,
+          style: 'content'
+        },
+        {
+          text:'金額：' + this.money,
+          style: 'content'
+        },
+        {
+          text:'□平安燈　' + '數量' + '　盞自　'　+ 'DATE' + '　起，迄　' + 'DATE+365' + '　止。',
+          style: 'content'
+        },
+        {
+          text:'奉獻者：',
+          style: 'content'
+        },
+        {
+          text:this.name,
+          style: 'content2'
+        },
+        {
+          text:'祈禱意向：',
+          style: 'content'
+        },
+        {
+          text:this.option,
+          style: 'content2'
+        },
+        {
+          text:'□其他：',
+          style: 'content'
+        },
+        {
+          text:'還不知道寫啥',
+          style: 'content2'
+        },
+        {
+          text:'備註：',
+          style: 'content'
+        },
+        {
+          text:'還不知道寫啥',
+          style: 'content2'
+        },
+        {
+          columns: [
+            {
+              text: '主管：',
+              fontSize: 16
             },
             {
-              // % width
-              width: '20%',
-              text: 'Fourth column'
-            }
-          ],
-          // optional space between columns
-          columnGap: 10
+              text: '經手人：',
+              alignment: 'center',
+              fontSize: 16
+            },
+            {
+              text: '日期：' + today.toLocaleDateString(),
+              alignment: 'right',
+              fontSize: 16
+            },
+          ],margin: [ 15, 5, 0, 10]
         },
-        'This paragraph goes below all columns and has full width',
-        'Bulleted list example:',
-        {
-          // to treat a paragraph as a bulleted list, set an array of items under the ul key
-          ul: [
-            'Item 1',
-            'Item 2',
-            'Item 3',
-            { text: 'Item 4', bold: true },
-          ]
-        },
-
-        'Numbered list example:',
-        {
-          // for numbered lists set the ol key
-          ol: [
-            'Item 1',
-            'Item 2',
-            'Item 3'
-          ]
-        },
-        // this.name,this.mobile,this.email,this.address,this.money,this.option
-        {
-          layout: 'lightHorizontalLines', // optional
-          table: {
-            // headers are automatically repeated if the table spans over multiple pages
-            // you can declare how many rows should be treated as headers
-            headerRows: 1,
-            widths: ['*', '*', '*', '*'],
-
-            body: [
-              ['First', 'Second', 'Third', 'The last one'],
-              ['Value 1', 'Value 2', 'Value 3', 'Value 4'],
-              [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4'],
-              ['1', '2', '3', '4'],
-              ['', '6', '7', '8'],
-            ]
-          }
-        }
+        // 'paragraph 1',
+        // 'paragraph 2',
+        // {
+        //   columns: [
+        //     'first column is a simple text',
+        //     {
+        //       stack: [
+        //         // second column consists of paragraphs
+        //         'paragraph A',
+        //         'paragraph B',
+        //         'these paragraphs will be rendered one below another inside the column'
+        //       ],
+        //       fontSize: 15
+        //     }
+        //   ]
+        // },
+        // 'This paragraph fills full width, as there are no columns. Next paragraph however consists of three columns',
+        // {
+        //   columns: [
+        //     {
+        //       // auto-sized columns have their widths based on their content
+        //       width: 'auto',
+        //       text: 'First column'
+        //     },
+        //     {
+        //       // star-sized columns fill the remaining space
+        //       // if there's more than one star-column, available width is divided equally
+        //       width: '*',
+        //       text: 'Second column'
+        //     },
+        //     {
+        //       // fixed width
+        //       width: 100,
+        //       text: 'Third column'
+        //     },
+        //     {
+        //       // % width
+        //       width: '20%',
+        //       text: 'Fourth column'
+        //     }
+        //   ],
+        //   // optional space between columns
+        //   columnGap: 10
+        // },
+        // 'This paragraph goes below all columns and has full width',
+        // 'Bulleted list example:',
+        // {
+        //   // to treat a paragraph as a bulleted list, set an array of items under the ul key
+        //   ul: [
+        //     'Item 1',
+        //     'Item 2',
+        //     'Item 3',
+        //     { text: 'Item 4', bold: true },
+        //   ]
+        // },
+        // 'Numbered list example:',
+        // {
+        //   // for numbered lists set the ol key
+        //   ol: [
+        //     'Item 1',
+        //     'Item 2',
+        //     'Item 3'
+        //   ]
+        // },
+        // // this.name,this.mobile,this.email,this.address,this.money,this.option
+        // {
+        //   layout: 'lightHorizontalLines', // optional
+        //   table: {
+        //     // headers are automatically repeated if the table spans over multiple pages
+        //     // you can declare how many rows should be treated as headers
+        //     headerRows: 1,
+        //     widths: ['*', '*', '*', '*'],
+        //     body: [
+        //       ['First', 'Second', 'Third', 'The last one'],
+        //       ['Value 1', 'Value 2', 'Value 3', 'Value 4'],
+        //       [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4'],
+        //       ['1', '2', '3', '4'],
+        //       ['', '6', '7', '8'],
+        //     ]
+        //   }
+        // }
       ],
-      defaultStyle: {
-        header:{
-          fontSize: 26
+      footer: [       
+          { 
+            text: '電話:03-9898747　傳真:03-9898747　地址:宜蘭縣三星鄉三星路二段103號',
+            style:'footer'
+          }
+          ],
+      styles: {
+        header: {
+          fontSize: 20,
+          margin: [0, 15, 0, 0],
+          width: '*',
         },
+        content: {
+          fontSize: 16,
+          margin: [15, 5, 0, 5],
+          width: '*',
+        },
+        content2: {
+          fontSize: 20,
+          margin: [15, 10, 0, 5],
+          width: '*',
+          color: 'blue'
+        },
+        footer: {
+          fontSize: 16,
+          margin:[ 5, 5, 5, 5],
+          width:'*',
+          alignment:'center'
+        }
+      },
+      defaultStyle: {
+        fontSize: 16,
+        margin: [0, 15, 0, 0],
         font: 'kaiu'
       }
     };
