@@ -26,6 +26,15 @@
         </ion-item>
       </ion-col>
     </ion-row>
+    
+    <ion-row>
+      <ion-col >
+        <ion-item>
+          <ion-label position="floating">聯絡電話</ion-label>
+          <ion-input formControlName="mobile" type="text" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
     <ion-row>
       <ion-col size="4">
@@ -45,14 +54,6 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col >
-        <ion-item>
-          <ion-label position="floating">聯絡電話</ion-label>
-          <ion-input formControlName="mobile" type="text" required></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
 
     <ion-row>
       <ion-col >
@@ -92,7 +93,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label>其他祈求意象,請在下方空格說明</ion-label>
+            <ion-label>其他祈求意象,請在下方空格填寫</ion-label>
             <ion-radio slot="start" value="其他"></ion-radio>
           </ion-item>
         </ion-radio-group>
@@ -101,7 +102,7 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating">Description</ion-label>
+          <ion-label position="floating">說明</ion-label>
           <ion-textarea formControlName="other" type="text" ></ion-textarea>
         </ion-item>
       </ion-col>
