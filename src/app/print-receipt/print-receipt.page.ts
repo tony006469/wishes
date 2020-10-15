@@ -24,6 +24,8 @@ export class PrintReceiptPage implements OnInit {
   money: any;
   name: any;
   option: any;
+  create_date:any;
+  expired_date:any;
   constructor(
     private aptService: AppointmentService,
     private actRoute: ActivatedRoute,
@@ -34,11 +36,13 @@ export class PrintReceiptPage implements OnInit {
     this.aptService.getprint(this.id).valueChanges().subscribe(res => {
       this.address = res[0];
       this.address_number = res[1];
-      this.email = res[2];
-      this.mobile = res[3];
-      this.money = res[4];
-      this.name = res[5];
-      this.option = res[6];
+      this.create_date = res[2]
+      this.email = res[3];
+      this.expired_date = res[4];
+      this.mobile = res[5];
+      this.money = res[6];
+      this.name = res[7];
+      this.option = res[8];
       console.log(res);
     });
   }
@@ -85,7 +89,7 @@ export class PrintReceiptPage implements OnInit {
           style: 'content'
         },
         {
-          text:'□平安燈　' + '數量' + '　盞自　'　+ 'DATE' + '　起，迄　' + 'DATE+365' + '　止。',
+          text:'□平安燈　' + '數量' + '　盞自　'　+ this.create_date + '　起，迄　' + this.expired_date + '　止。',
           style: 'content'
         },
         {
