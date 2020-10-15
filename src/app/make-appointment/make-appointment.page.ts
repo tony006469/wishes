@@ -33,6 +33,13 @@ export class MakeAppointmentPage implements OnInit {
   }
 
   formSubmit() {
+    var during_date = Math.ceil(this.bookingForm.controls['money'].value)
+    var nowDate = new Date()
+    // TODO: need to caculate during date
+    console.log(this.bookingForm.value)
+    this.bookingForm.controls['create_date'].setValue(nowDate.toLocaleDateString())
+    this.bookingForm.controls['expired_date'].setValue(nowDate.toLocaleDateString())
+
     if (!this.bookingForm.valid) {
       return false;
     } else {

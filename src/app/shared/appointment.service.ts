@@ -22,8 +22,8 @@ export class AppointmentService {
       address: apt.address,
       money: apt.money,
       option: apt.option,
-      create_datetime:apt.create_date,
-      expired_datetime:apt.expired_date,
+      create_date:apt.create_date,
+      expired_date:apt.expired_date,
       other:apt.other
     })
   }
