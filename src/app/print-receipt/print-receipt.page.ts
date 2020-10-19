@@ -27,12 +27,14 @@ export class PrintReceiptPage implements OnInit {
   other: any;
   create_date: any;
   expired_date: any;
+  receipt_number: number;
   constructor(
     private aptService: AppointmentService,
     private actRoute: ActivatedRoute,
     private router: Router,
-    public fb: FormBuilder
+    public fb: FormBuilder    
   ) {
+    this.receipt_number = 20200001;
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.aptService.getprint(this.id).valueChanges().subscribe(res => {
       this.address = res[0];
@@ -72,9 +74,9 @@ export class PrintReceiptPage implements OnInit {
               fontSize: 22
             },
             {
-              text: '聖嘉民__號',
-              alignment: 'right',
-              fontSize: 22
+              text: '聖嘉民' + this.receipt_number + '號',
+              // alignment: 'right',
+              fontSize: 20
             },
           ], margin: [0, 5, 0, 10]
         },
@@ -219,6 +221,7 @@ export class PrintReceiptPage implements OnInit {
         bolditalics: 'kaiu.ttf'
       }
     };
+    this.receipt_number++;
     pdfMake.createPdf(documentDefinition).open();
   }
 
@@ -258,7 +261,6 @@ export class PrintReceiptPage implements OnInit {
     }
     )
   }
-
 
   ngOnInit() {
   }
