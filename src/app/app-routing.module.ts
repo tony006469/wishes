@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'expire-list',
     loadChildren: () => import('./expire-list/expire-list.module').then( m => m.ExpireListPageModule)
   },
+  {
+    path: 'sticker-list',
+    loadChildren: () => import('./sticker-list/sticker-list.module').then( m => m.StickerListPageModule)
+  },
 ];
 
 @NgModule({

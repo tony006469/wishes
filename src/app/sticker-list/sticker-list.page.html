@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>sticker-list</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let booking of Bookings" class="sticker-list">
+      <ion-checkbox color="primary" slot="start" ></ion-checkbox>
+      <ion-label>
+        <h5>
+          <ion-icon name="person"></ion-icon> {{booking.name}}
+        </h5>
+        <p>
+          <ion-icon name="call"></ion-icon> {{booking.mobile}}
+        </p>
+        <p>
+          <ion-icon name="mail"></ion-icon> {{booking.email}}
+        </p>
+        <p>
+          <ion-icon name="alarm"></ion-icon> {{booking.expired_date}}
+        </p>
+      </ion-label>
+  </ion-item>
+
+
+
+</ion-content>
