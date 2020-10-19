@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>expire-list</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let outbook of Outbookings" class="expire-list">
+    <ion-label>
+      <h5>
+        <ion-icon name="person"></ion-icon> {{outbook.name}}
+      </h5>
+      <p>
+        <ion-icon name="call"></ion-icon> {{outbook.mobile}}
+      </p>
+      <p>
+        <ion-icon name="mail"></ion-icon> {{outbook.email}}
+      </p>
+      <p>
+        <ion-icon name="alarm"></ion-icon> {{outbook.expired_date}}
+      </p>
+    </ion-label>
+</ion-item>
+
+</ion-content>

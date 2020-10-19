@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'print-receipt/:id',
     loadChildren: () => import('./print-receipt/print-receipt.module').then( m => m.PrintReceiptPageModule)
   },
+  {
+    path: 'expire-list',
+    loadChildren: () => import('./expire-list/expire-list.module').then( m => m.ExpireListPageModule)
+  },
 ];
 
 @NgModule({
