@@ -1,5 +1,6 @@
 export class Appointment {
     $key: string;
+    serial_number: number;
     name: string;
     email: string
     mobile: number;

@@ -10,7 +10,16 @@
 
   <form [formGroup]="updateBookingForm" (ngSubmit)="updateForm()">
     <ion-row>
-      <ion-col >
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">燈號</ion-label>
+          <ion-input formControlName="serial_number" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <ion-item>
           <ion-label position="floating">奉獻者姓名</ion-label>
           <ion-input formControlName="name" type="text" required></ion-input>
@@ -26,12 +35,30 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    
+
     <ion-row>
-      <ion-col >
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">起始日期</ion-label>
+          <ion-datetime formControlName="create_date" displayFormat="YYYY/MM/DD" max="2030-12-31" required></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">終止日期</ion-label>
+          <ion-datetime formControlName="expired_date" displayFormat="YYYY/MM/DD" max="2030-12-31" required></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <ion-item>
           <ion-label position="floating">聯絡電話</ion-label>
-          <ion-input formControlName="mobile" type="text" required></ion-input>
+          <ion-input formControlName="mobile" type="text"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -40,7 +67,7 @@
       <ion-col size="4">
         <ion-item>
           <ion-label position="floating" font-size="1px">郵遞區號</ion-label>
-          <ion-input formControlName="address_number" type="text" required></ion-input>
+          <ion-input formControlName="address_number" type="text"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -49,44 +76,44 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">地址</ion-label>
-          <ion-input formControlName="address" type="text" required></ion-input>
+          <ion-input formControlName="address" type="text"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
 
 
     <ion-row>
-      <ion-col >
+      <ion-col>
         <ion-item>
           <ion-label position="floating">E-mail:</ion-label>
-          <ion-input formControlName="email" type="text" required></ion-input>
+          <ion-input formControlName="email" type="text"></ion-input>
         </ion-item>
       </ion-col>
-    </ion-row>  
+    </ion-row>
 
 
     <ion-row>
-      <ion-list >
-        <ion-radio-group formControlName="option" required>
+      <ion-list>
+        <ion-radio-group formControlName="option">
           <ion-list-header>
             <ion-label>祈求意向</ion-label>
           </ion-list-header>
-      
+
           <ion-item>
             <ion-label>祈求平安康復</ion-label>
             <ion-radio slot="start" value="祈求平安康復"></ion-radio>
           </ion-item>
-      
+
           <ion-item>
             <ion-label>祈求事業順利</ion-label>
             <ion-radio slot="start" value="祈求事業順利"></ion-radio>
           </ion-item>
-      
+
           <ion-item>
             <ion-label>祈求學業進步</ion-label>
             <ion-radio slot="start" value="祈求學業進步"></ion-radio>
           </ion-item>
-          
+
           <ion-item>
             <ion-label>祈求家庭和樂</ion-label>
             <ion-radio slot="start" value="祈求家庭和樂"></ion-radio>
@@ -103,14 +130,14 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">說明</ion-label>
-          <ion-textarea formControlName="other" type="text" ></ion-textarea>
+          <ion-textarea formControlName="other" type="text"></ion-textarea>
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="primary" shape="full" expand="block">確定修改</ion-button>
+        <ion-button type="submit" color="primary" shape="round" expand="block">確定修改</ion-button>
       </ion-col>
     </ion-row>
   </form>
