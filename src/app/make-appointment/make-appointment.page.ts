@@ -20,6 +20,7 @@ export class MakeAppointmentPage implements OnInit {
 
   ngOnInit() {
     this.bookingForm = this.fb.group({
+      serial_number: [''],
       name: [''],
       email: [''],
       mobile: [''],
@@ -34,17 +35,22 @@ export class MakeAppointmentPage implements OnInit {
   }
 
   formSubmit() {
-    var during_date = Math.ceil(this.bookingForm.controls['money'].value/1000)
-    var nowDate = new Date()    
-    var expireDate = new Date(nowDate)
-    expireDate.setFullYear(expireDate.getFullYear()+during_date)
-    expireDate.setDate(expireDate.getDate()-1)    
+    // var during_date = Math.ceil(this.bookingForm.controls['money'].value/1000)
+    // var nowDate = new Date()    
+    // var expireDate = new Date(nowDate)
+    // expireDate.setFullYear(expireDate.getFullYear()+during_date)
+    // expireDate.setDate(expireDate.getDate()-1)    
+    // var endDate = formatDate(expireDate, 'yyyy/MM/dd', 'en-US')
+    // console.log(during_date)
+    // console.log(nowDate.toLocaleDateString())
+    // console.log(endDate)
+    // this.bookingForm.controls['create_date'].setValue(nowDate.toLocaleDateString())
+    // this.bookingForm.controls['expired_date'].setValue(endDate)
+    var createDate = this.bookingForm.controls['create_date'].value
+    var expireDate = this.bookingForm.controls['expired_date'].value
+    var startDate = formatDate(createDate, 'yyyy/MM/dd', 'en-US')
     var endDate = formatDate(expireDate, 'yyyy/MM/dd', 'en-US')
-    console.log(this.bookingForm.value)
-    console.log(during_date)
-    console.log(nowDate.toLocaleDateString())
-    console.log(endDate)
-    this.bookingForm.controls['create_date'].setValue(nowDate.toLocaleDateString())
+    this.bookingForm.controls['create_date'].setValue(startDate)
     this.bookingForm.controls['expired_date'].setValue(endDate)
 
     if (!this.bookingForm.valid) {

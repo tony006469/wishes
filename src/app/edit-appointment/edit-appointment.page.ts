@@ -26,6 +26,7 @@ export class EditAppointmentPage implements OnInit {
 
   ngOnInit() {
     this.updateBookingForm = this.fb.group({
+      serial_number: [''],
       name: [''],
       email: [''],
       mobile: [''],

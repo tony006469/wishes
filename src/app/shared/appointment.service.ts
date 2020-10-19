@@ -15,6 +15,7 @@ export class AppointmentService {
   // Create
   createBooking(apt: Appointment) {
     return this.bookingListRef.push({
+      serial_number: apt.serial_number,
       name: apt.name,
       email: apt.email,
       mobile: apt.mobile,
@@ -47,6 +48,7 @@ export class AppointmentService {
   // Update
   updateBooking(id, apt: Appointment) {
     return this.bookingRef.update({
+      serial_number: apt.serial_number,
       name: apt.name,
       email: apt.email,
       mobile: apt.mobile,
@@ -54,6 +56,8 @@ export class AppointmentService {
       address: apt.address,
       money: apt.money,
       option: apt.option,
+      create_date:apt.create_date,
+      expired_date:apt.expired_date,
       other:apt.other
     })
   }

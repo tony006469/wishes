@@ -24,6 +24,7 @@ export class PrintReceiptPage implements OnInit {
   money: any;
   name: any;
   option: any;
+  other: any;
   create_date: any;
   expired_date: any;
   constructor(
@@ -43,10 +44,11 @@ export class PrintReceiptPage implements OnInit {
       this.money = res[6];
       this.name = res[7];
       this.option = res[8];
+      this.other = res[9];
       console.log(res);
     });
   }
-
+  // TODO:燈號&流水號
   generatePdf() {
     var today = new Date();
     const documentDefinition = {
@@ -89,7 +91,7 @@ export class PrintReceiptPage implements OnInit {
           style: 'content'
         },
         {
-          text: '金額：新台幣　　拾　　萬　　仟　　佰　　拾　　元整',
+          text: '金額：　NT　$　' + this.money + '　元',
           style: 'content'
         },
         {
@@ -123,7 +125,7 @@ export class PrintReceiptPage implements OnInit {
           style: 'title'
         },
         {
-          text: '還不知道寫啥',
+          text: this.other,
           style: 'content2'
         },
         {
@@ -137,7 +139,7 @@ export class PrintReceiptPage implements OnInit {
           width: '*'
         },
         {
-          text: '還不知道寫啥',
+          text: '',
           style: 'content2'
         },
         {
