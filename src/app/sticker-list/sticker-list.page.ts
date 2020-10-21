@@ -3,6 +3,9 @@ import { Appointment } from '../shared/Appointment';
 import { AppointmentService } from './../shared/appointment.service';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder, Validators} from "@angular/forms";
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from '../../assets/fonts/vfs_fonts';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -64,7 +67,38 @@ export class StickerListPage implements OnInit {
     })
   }
   getCheckedBoxes() {
-    //Do whatever
+    var docDefinition = {
+      // a string or { width: number, height: number }
+      pageSize: 'A4',
+      // by default we use portrait, you can change it to landscape if you wish
+      // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+      //pageMargins: [ 40, 60, 40, 60 ],
+      defaultStyle: {
+        font: 'kaiu'
+      }
+      
+    };
+
     console.log(this.checkBookings);
+    var content = [];
+      this.checkBookings.forEach(item =>{
+        let text =  "\n" + item.name + "\n"  +  "奉獻祈禱意向\n" + item.option + "\n" + item.other + "\n" + item.create_date + "-" + item.expired_date ;
+        let jobj = {
+          width: "auto",
+          text: text
+        }
+        content.push(jobj)
+      })
+      console.log(content)
+      docDefinition["content"] = content
+      pdfMake.fonts = {
+        kaiu: {
+          normal: 'kaiu.ttf',
+          bold: 'kaiu.ttf',
+          italics: 'kaiu.ttf',
+          bolditalics: 'kaiu.ttf'
+        }
+      };
+      pdfMake.createPdf(docDefinition).open();
   }
 }
