@@ -5,7 +5,8 @@ import { AppointmentService } from './../shared/appointment.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from '../../assets/fonts/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
-
+import { ReceiptNumberService } from 'src/app/service/receipt-number.service';
+import * as firebase from 'firebase';
 
 import { jsPDF } from 'jspdf';
 import domtoimage from 'dom-to-image';
@@ -27,14 +28,15 @@ export class PrintReceiptPage implements OnInit {
   other: any;
   create_date: any;
   expired_date: any;
-  receipt_number: number;
+  receipt_number: any;
+  serial_number:any;
   constructor(
+    private receiptnumberService: ReceiptNumberService,
     private aptService: AppointmentService,
     private actRoute: ActivatedRoute,
     private router: Router,
-    public fb: FormBuilder    
+    public fb: FormBuilder
   ) {
-    this.receipt_number = 20200001;
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.aptService.getprint(this.id).valueChanges().subscribe(res => {
       this.address = res[0];
@@ -47,16 +49,24 @@ export class PrintReceiptPage implements OnInit {
       this.name = res[7];
       this.option = res[8];
       this.other = res[9];
+      this.serial_number=res[10];
       console.log(res);
     });
   }
-  // TODO:燈號&流水號
+
+  ngOnInit() {
+    firebase.database().ref("number/number").on('value', (snapshot) => {
+      this.receipt_number = snapshot.val();
+    });
+  }
+
+
   generatePdf() {
     var today = new Date();
     const documentDefinition = {
       header: [
         {
-          text: '財團法人天主教靈醫會 (聖嘉民朝聖地)',
+          text:'財團法人天主教靈醫會 (聖嘉民朝聖地)',
           alignment: 'center',
           style: 'header'
         }
@@ -81,97 +91,42 @@ export class PrintReceiptPage implements OnInit {
           ], margin: [0, 5, 0, 10]
         },
         {
-          text: '_________________________________________________________',
-          style: 'line'
+          style: 'tableExample',
+          table: {
+            widths: ['*'],
+            body: [
+              [{text:"\n"+'茲收到　　' + this.name + '　　君　　(連絡電話:' + this.mobile + ')'+"\n"+"\n"+'地址：' + this.address+"\n"+"\n"+'金額：　新台幣　' + this.money + '　元整'+"\n"+"\n"}]
+              
+            ]
+          }
         },
         {
-          text: '茲收到　　' + this.name + '　　君　　(連絡電話:' + this.mobile + ')',
-          style: 'content'
+          style: 'tableExample',
+          table: {
+            widths: ['*'],
+            body: [
+              [{text:"\n"+'□平安燈　' + '' + '　盞自　' + this.create_date + '　起，迄　' + this.expired_date + '　止。'+"\n"+"\n"+"\n"+"\n"+'奉獻者：'+ this.name+'   燈號 '+this.serial_number+"\n"+"\n"+"\n"+"\n"+'祈禱意向：' + this.option +"\n"+"\n"+"\n"+"\n"+'□其他：'+this.other+"\n"+"\n"+"\n"+"\n"}]
+            ]
+          }
         },
         {
-          text: '地址：' + this.address,
-          style: 'content'
+          style: 'tableExample',
+          table: {
+            widths: ['*'],
+            body: [
+              [{text:"\n"+'備註：'+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"}]
+            ]
+          }
         },
         {
-          text: '金額：　NT　$　' + this.money + '　元',
-          style: 'content'
+          style: 'tableExample',
+          table: {
+            widths: ['*'],
+            body: [
+              [{text:"\n"+'主管：'+'             '+'經手人：'+'             '+'日期：'+ today.toLocaleDateString() +"\n"+"\n"+"\n"+"\n"+'電話:03-9898747　  傳真:03-9898747      地址:宜蘭縣三星鄉三星路二段103號'+"\n",fontSize:14}]
+            ]
+          }
         },
-        {
-          text: '_________________________________________________________',
-          style: 'line'
-        },
-        {
-          text: '□平安燈　' + '' + '　盞自　' + this.create_date + '　起，迄　' + this.expired_date + '　止。',
-          fontSize: 18,
-          margin: [15, 5, 0, 5],
-          width: '*'
-        },
-        {
-          text: '奉獻者：',
-          style: 'title'
-        },
-        {
-          text: this.name,
-          style: 'content2'
-        },
-        {
-          text: '祈禱意向：',
-          style: 'title'
-        },
-        {
-          text: this.option,
-          style: 'content2'
-        },
-        {
-          text: '□其他：',
-          style: 'title'
-        },
-        {
-          text: this.other,
-          style: 'content2'
-        },
-        {
-          text: '_________________________________________________________',
-          style: 'line'
-        },
-        {
-          text: '備註：',
-          fontSize: 18,
-          margin: [15, 5, 0, 5],
-          width: '*'
-        },
-        {
-          text: '',
-          style: 'content2'
-        },
-        {
-          text: '_________________________________________________________',
-          style: 'line'
-        },
-        {
-          columns: [
-            {
-              text: '主管：',
-              fontSize: 18
-            },
-            {
-              text: '經手人：',
-              alignment: 'center',
-              fontSize: 18
-            },
-            {
-              text: '日期：' + today.toLocaleDateString(),
-              alignment: 'right',
-              fontSize: 18
-            },
-          ], margin: [15, 40, 0, 15]
-        },
-      ],
-      footer: [
-        {
-          text: '電話:03-9898747　傳真:03-9898747　地址:宜蘭縣三星鄉三星路二段103號',
-          style: 'footer'
-        }
       ],
       styles: {
         header: {
@@ -221,7 +176,8 @@ export class PrintReceiptPage implements OnInit {
         bolditalics: 'kaiu.ttf'
       }
     };
-    this.receipt_number++;
+    this.receipt_number++;   
+    this.receiptnumberService.updateSerial(this.receipt_number);
     pdfMake.createPdf(documentDefinition).open();
   }
 
@@ -260,9 +216,6 @@ export class PrintReceiptPage implements OnInit {
       doc.save('pdfDocument.pdf');
     }
     )
-  }
-
-  ngOnInit() {
   }
 
 }
