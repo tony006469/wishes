@@ -5,7 +5,8 @@ import { AppointmentService } from './../shared/appointment.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from '../../assets/fonts/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
-
+import { ReceiptNumberService } from 'src/app/service/receipt-number.service';
+import * as firebase from 'firebase';
 
 import { jsPDF } from 'jspdf';
 import domtoimage from 'dom-to-image';
@@ -27,14 +28,14 @@ export class PrintReceiptPage implements OnInit {
   other: any;
   create_date: any;
   expired_date: any;
-  receipt_number: number;
+  receipt_number: any;
   constructor(
+    private receiptnumberService: ReceiptNumberService,
     private aptService: AppointmentService,
     private actRoute: ActivatedRoute,
     private router: Router,
-    public fb: FormBuilder    
+    public fb: FormBuilder
   ) {
-    this.receipt_number = 20200001;
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.aptService.getprint(this.id).valueChanges().subscribe(res => {
       this.address = res[0];
@@ -50,7 +51,14 @@ export class PrintReceiptPage implements OnInit {
       console.log(res);
     });
   }
-  // TODO:燈號&流水號
+
+  ngOnInit() {
+    firebase.database().ref("number/number").on('value', (snapshot) => {
+      this.receipt_number = snapshot.val();
+    });
+  }
+
+
   generatePdf() {
     var today = new Date();
     const documentDefinition = {
@@ -221,7 +229,8 @@ export class PrintReceiptPage implements OnInit {
         bolditalics: 'kaiu.ttf'
       }
     };
-    this.receipt_number++;
+    this.receipt_number++;   
+    this.receiptnumberService.updateSerial(this.receipt_number);
     pdfMake.createPdf(documentDefinition).open();
   }
 
@@ -260,9 +269,6 @@ export class PrintReceiptPage implements OnInit {
       doc.save('pdfDocument.pdf');
     }
     )
-  }
-
-  ngOnInit() {
   }
 
 }
