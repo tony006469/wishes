@@ -11,8 +11,8 @@
     <ion-list-header class="ios hydrated">
       奉獻者名單
     </ion-list-header>
-
-    <ion-item *ngFor="let booking of Bookings" class="user-list">
+    <ion-searchbar animated [formControl]="searchControl" placeholder="搜尋"></ion-searchbar>
+    <ion-item *ngFor="let booking of Result" class="user-list">
       <ion-label>
         <h5>
           <ion-icon name="person"></ion-icon> {{booking.name}}
