@@ -5,9 +5,9 @@
 </ion-header>
 
 <ion-content>
-    <ion-item *ngFor="let booking of Bookings" class="sticker-list">
-      <ion-checkbox color="primary" slot="start" ></ion-checkbox>
+    <ion-item *ngFor="let booking of Bookings; let i = index" class="sticker-list">
       <ion-label>
+        <ion-checkbox color="primary" slot="start" (ionChange)="formSubmit($event, booking)"></ion-checkbox>
         <h5>
           <ion-icon name="person"></ion-icon> {{booking.name}}
         </h5>
@@ -18,10 +18,14 @@
           <ion-icon name="mail"></ion-icon> {{booking.email}}
         </p>
         <p>
+          <ion-icon name="alarm"></ion-icon> {{booking.create_date}}
+        </p>
+        <p>
           <ion-icon name="alarm"></ion-icon> {{booking.expired_date}}
         </p>
       </ion-label>
   </ion-item>
+  <ion-fab-button (click)='getCheckedBoxes()'>列印 </ion-fab-button>
 
 
 
