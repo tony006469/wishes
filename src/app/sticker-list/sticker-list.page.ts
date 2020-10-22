@@ -87,6 +87,7 @@ export class StickerListPage implements OnInit {
     var count = 0;
     // console.log(column)
     let table = {
+      heights:[120,120,120,120,120],
       // widths: ["*", "*", "*", "*"],
       body: [
         // [[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]]
