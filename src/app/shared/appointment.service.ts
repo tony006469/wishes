@@ -45,6 +45,13 @@ export class AppointmentService {
     return this.bookingListRef;
   }
 
+  getExpireBookingList(){
+    this.bookingListRef = this.db.list('/appointment', ref => {
+      return ref.orderByChild("expired_date").limitToFirst(1000)
+    })
+    return this.bookingListRef
+  }
+
   // Update
   updateBooking(id, apt: Appointment) {
     return this.bookingRef.update({

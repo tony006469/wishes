@@ -20,7 +20,7 @@ export class ExpireListPage implements OnInit {
 
   ngOnInit() {
 
-    let bookingRes = this.aptService.getBookingList();
+    let bookingRes = this.aptService.getExpireBookingList();
 
     bookingRes.snapshotChanges().subscribe(res => {
       this.Outbookings = [];
