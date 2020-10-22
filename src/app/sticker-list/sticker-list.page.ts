@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TestabilityRegistry } from '@angular/core';
 import { Appointment } from '../shared/Appointment';
 import { AppointmentService } from './../shared/appointment.service';
 import * as moment from 'moment';
@@ -81,16 +81,44 @@ export class StickerListPage implements OnInit {
 
     console.log(this.checkBookings);
     var content = [];
-      this.checkBookings.forEach(item =>{
-        let text =  "\n" + item.name + "\n"  +  "奉獻祈禱意向\n" + item.option + "\n" + item.other + "\n" + item.create_date + "-" + item.expired_date ;
-        let jobj = {
-          width: "auto",
-          text: text
+    var table_obj = {};
+    var column = [];
+    var tmp_array = [];
+    var count = 0;
+    // console.log(column)
+    let table = {
+      // widths: ["*", "*", "*", "*"],
+      body: [
+        // [[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]]
+      ]
+    }
+
+    this.checkBookings.forEach(item =>{
+        let text =  item.name + "\n" + "奉獻祈禱意向" + "\n" + item.option + "\n" + item.other + "\n" +  item.create_date + "-" + item.expired_date;
+
+        if (count == 4){
+          table['body'].push(column)
+          column = [];
+          count = 0
+          column.push(text)
+          count += 1
+        } else {
+          column.push(text)
+          count += 1
         }
-        content.push(jobj)
-      })
-      console.log(content)
+    })
+    if (count != 0){
+      var lack_element = 4 - column.length
+      for (var i=1; i<=lack_element;i++){
+        column.push("")
+      }
+        table['body'].push(column)
+    }
+
+      table_obj = {table}
+      content.push(table_obj)
       docDefinition["content"] = content
+      console.info(docDefinition)
       pdfMake.fonts = {
         kaiu: {
           normal: 'kaiu.ttf',
