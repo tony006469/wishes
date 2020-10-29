@@ -105,7 +105,7 @@ export class PrintReceiptPage implements OnInit {
           table: {
             widths: ['*'],
             body: [
-              [{text:"\n"+'□平安燈　' + '' + '　盞自　' + this.create_date + '　起，迄　' + this.expired_date + '　止。'+"\n"+"\n"+"\n"+"\n"+'奉獻者：'+ this.name+'   燈號 '+this.serial_number+"\n"+"\n"+"\n"+"\n"+'祈禱意向：' + this.option +"\n"+"\n"+"\n"+"\n"+'□其他：'+this.other+"\n"+"\n"+"\n"+"\n"}]
+              [{text:"\n"+'□平安燈　' + '' + '　盞自　' + this.create_date + '　起，迄　' + this.expired_date + '　止。'+"\n"+"\n"+"\n"+"\n"+'奉獻者：'+ this.name+'   燈號： '+this.serial_number+"\n"+"\n"+"\n"+"\n"+'祈禱意向：' + this.option +"\n"+"\n"+"\n"+"\n"+'□其他：'+this.other+"\n"+"\n"+"\n"+"\n"}]
             ]
           }
         },
