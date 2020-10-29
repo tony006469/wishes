@@ -29,7 +29,8 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">起始日期</ion-label>
-            <ion-datetime formControlName="create_date" displayFormat="YYYY/MM/DD" max="2030-12-31" required></ion-datetime>
+            <ion-datetime formControlName="create_date" displayFormat="YYYY/MM/DD" max="2030-12-31" required>
+            </ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -38,7 +39,8 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">終止日期</ion-label>
-            <ion-datetime formControlName="expired_date" displayFormat="YYYY/MM/DD" max="2030-12-31" required></ion-datetime>
+            <ion-datetime formControlName="expired_date" displayFormat="YYYY/MM/DD" max="2030-12-31" required>
+            </ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -79,8 +81,7 @@
         </ion-col>
       </ion-row>
 
-
-      <ion-row>
+      <!-- <ion-row>
         <ion-list>
           <ion-radio-group formControlName="option">
             <ion-list-header>
@@ -89,7 +90,7 @@
 
             <ion-item>
               <ion-label>祈求平安康健</ion-label>
-              <ion-radio slot="start" value="祈求平安康復"></ion-radio>
+              <ion-radio slot="start" value="祈求平安康健"></ion-radio>
             </ion-item>
 
             <ion-item>
@@ -113,7 +114,23 @@
             </ion-item>
           </ion-radio-group>
         </ion-list>
+      </ion-row> -->
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">祈禱意向</ion-label>
+            <ion-select formControlName="option" multiple="true" cancelText="取消" okText="確定">
+              <ion-select-option value="祈求平安康健">祈求平安康健</ion-select-option>
+              <ion-select-option value="祈求事業順利">祈求事業順利</ion-select-option>
+              <ion-select-option value="祈求學業進步">祈求學業進步</ion-select-option>
+              <ion-select-option value="祈求家庭和樂">祈求家庭和樂</ion-select-option>
+              <ion-select-option value="其他">其他</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col>
           <ion-item>

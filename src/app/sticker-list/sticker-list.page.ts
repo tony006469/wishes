@@ -95,6 +95,7 @@ export class StickerListPage implements OnInit {
     }
 
     this.checkBookings.forEach(item =>{
+        item.option = Object.values(item.option).join() 
         let text =  item.name + "\n" + "奉獻祈禱意向" + "\n" + item.option + "\n" + item.other + "\n" +  item.create_date + "-" + item.expired_date;
 
         if (count == 4){

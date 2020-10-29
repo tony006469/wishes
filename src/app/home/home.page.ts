@@ -29,8 +29,9 @@ export class HomePage implements OnInit {
       res.reverse().forEach(item => {
         let a = item.payload.toJSON();
         a['$key'] = item.key;
+        a['option'] = this.obj2str(a['option'])
         this.Bookings.push(a as Appointment);
-        this.Result = this.Bookings;
+        this.Result = this.Bookings;      
       })
     });
     this.setFilteredItems("");
@@ -41,7 +42,7 @@ export class HomePage implements OnInit {
         this.setFilteredItems(search);
       });
   }
-
+  
   fetchBookings() {
     this.aptService.getBookingList().valueChanges().subscribe(res => {
       console.log(res)
@@ -65,4 +66,8 @@ export class HomePage implements OnInit {
     });
     console.log(this.Result)
   }}
+
+  obj2str(elements){
+    return Object.values(elements).join()
+  }
 }
