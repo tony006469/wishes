@@ -20,6 +20,11 @@
         <ion-icon name="alarm"></ion-icon> {{outbook.expired_date}}
       </p>
     </ion-label>
+    <div class="item-note" item-end>
+      <button ion-button (click)="exportNotify(outbook)">
+        <ion-icon name="print" style="zoom:2.0"></ion-icon>
+      </button>
+    </div>
 </ion-item>
 
 </ion-content>
