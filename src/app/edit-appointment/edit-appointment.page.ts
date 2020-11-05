@@ -49,10 +49,15 @@ export class EditAppointmentPage implements OnInit {
     var endDate = formatDate(expireDate, 'yyyy/MM/dd', 'en-US')
     this.updateBookingForm.controls['create_date'].setValue(startDate)
     this.updateBookingForm.controls['expired_date'].setValue(endDate)
-    this.aptService.updateBooking(this.id, this.updateBookingForm.value)
+
+    if (!this.updateBookingForm.valid) {
+      return false;
+    } else {
+      this.aptService.updateBooking(this.id, this.updateBookingForm.value)
       .then(() => {
         this.router.navigate(['/home']);
       })
       .catch(error => console.log(error));
+    }    
   }
 }
