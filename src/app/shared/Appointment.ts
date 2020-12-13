@@ -11,4 +11,5 @@ export class Appointment {
     expired_date: string;
     option: string;
     other:string;
+    printed: boolean;
 }

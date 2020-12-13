@@ -25,7 +25,8 @@ export class AppointmentService {
       option: apt.option,
       create_date:apt.create_date,
       expired_date:apt.expired_date,
-      other:apt.other
+      other:apt.other,
+      printed: false
     })
   }
   // Get Single
@@ -73,5 +74,13 @@ export class AppointmentService {
   deleteBooking(id: string) {
     this.bookingRef = this.db.object('/appointment/' + id);
     this.bookingRef.remove();
+  }
+
+  // Update sticker print state
+  updatePrintState(id, apt: Appointment) {
+    this.bookingRef = this.db.object('/appointment/' + id);
+    return this.bookingRef.update({
+      printed: true
+    })
   }
 }

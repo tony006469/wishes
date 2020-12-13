@@ -35,7 +35,8 @@ export class StickerListPage implements OnInit {
       expired_date:[''],
       option: [''],
       other:[''],
-      check: ['false', Validators.required]
+      check: ['false', Validators.required],
+      printed: false
     })
     
 
@@ -114,6 +115,7 @@ export class StickerListPage implements OnInit {
           column.push(text)
           count += 1
         }
+        this.aptService.updatePrintState(item.$key, this.stickerForm.value)
     })
     if (count != 0){
       var lack_element = 4 - column.length
