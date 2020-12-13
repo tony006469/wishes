@@ -51,6 +51,16 @@ export class StickerListPage implements OnInit {
     })
   }
 
+  strip(str, remove) {
+    while (str.length > 0 && remove.indexOf(str.charAt(0)) != -1) {
+      str = str.substr(1);
+    }
+    while (str.length > 0 && remove.indexOf(str.charAt(str.length - 1)) != -1) {
+      str = str.substr(0, str.length - 1);
+    }
+    return str;
+  }
+
   formSubmit(event, checkbox : String){
     if ( event.target.checked ) {
       this.checkBookings.push(checkbox);
@@ -81,6 +91,7 @@ export class StickerListPage implements OnInit {
       // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
       //pageMargins: [ 40, 60, 40, 60 ],
       defaultStyle: {
+        fontSize: 16,
         font: 'kaiu'
       }
       
@@ -95,7 +106,7 @@ export class StickerListPage implements OnInit {
     // console.log(column)
     let table = {
       heights:[120,120,120,120,120],
-      // widths: ["*", "*", "*", "*"],
+      widths: [120,120,120,120],
       body: [
         // [[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]],[[1,2,3,4,5]]
       ]
@@ -103,6 +114,7 @@ export class StickerListPage implements OnInit {
 
     this.checkBookings.forEach(item =>{
         item.option = Object.values(item.option).join() 
+        item.option = this.strip(item.option, ",")
         let text =  item.name + "\n" + "奉獻祈禱意向" + "\n" + item.option + "\n" + item.other + "\n" +  item.create_date + "-" + item.expired_date;
 
         if (count == 4){
