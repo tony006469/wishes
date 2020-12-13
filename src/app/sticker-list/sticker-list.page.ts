@@ -60,6 +60,12 @@ export class StickerListPage implements OnInit {
     
 
   }
+  reloadPage(){
+    setTimeout( () => {
+      location.reload();
+    }, 5000);
+}
+
   //Removes checkbox from array when you uncheck it
   removeCheckedFromArray(checkbox : String) {
     return this.checkBookings.findIndex((category)=>{
