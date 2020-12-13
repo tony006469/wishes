@@ -69,7 +69,6 @@ export class ExpireListPage implements OnInit {
           { text: "\u200B"},
           { text: "\u200B"},
           { text: "\u200B"},
-          { text: "\u200B"},
           { text: "親愛的點燈人您好：", style: "content"},
           { text: "\u200B\u200B感謝您在聖嘉民朝聖地點亮光牆上的一盞小燈;在繽紛的光牆上，您所點亮的祈福平安燈有著天主滿滿的祝福，也帶給參訪者駐足讚嘆與無比感動!", style: "content"},
           { text: "\u200B\u200B莊嚴的聖地因為有了繽紛的平安燈光牆更顯得無比寧靜與聖潔﹗謝謝您過去一年的支持，讓這盞充滿祝福的祈福燈一直亮著。由於您所奉獻的平安燈即將屆期，也邀請您 " + outbook.expired_date + " 之前，完成繳款手續(一年費用為新台幣壹仟元整)，好讓這盞充滿愛的小燈繼續閃亮一整年，感謝您也祝福您!", style: "content"},
