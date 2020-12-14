@@ -6,7 +6,7 @@
 
 <ion-content>
     <ion-item *ngFor="let booking of Bookings; let i = index" class="sticker-list">
-      <ion-label>
+      <ion-label [ngStyle]="{'color':booking.printed == false ? 'black' : 'blue' }">
         <ion-checkbox color="primary" slot="start" (ionChange)="formSubmit($event, booking)"></ion-checkbox>
         <h5>
           <ion-icon name="person"></ion-icon> {{booking.name}}
@@ -15,7 +15,7 @@
           <ion-icon name="call"></ion-icon> {{booking.mobile}}
         </p>
         <p>
-          <ion-icon name="mail"></ion-icon> {{booking.email}}
+          <ion-icon name="mail"></ion-icon> {{booking.email}} 
         </p>
         <p>
           <ion-icon name="alarm"></ion-icon> {{booking.create_date}}
