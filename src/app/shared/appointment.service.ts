@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Appointment } from '../shared/Appointment';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,16 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 export class AppointmentService {
   bookingListRef: AngularFireList<any>;
   bookingRef: AngularFireObject<any>;
+  order_number:any;  
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { 
+    firebase.database().ref("number/order").on('value', (snapshot) => {
+      this.order_number = snapshot.val();
+    });
+  }
 
   // Create
-  createBooking(apt: Appointment) {
+  createBooking(apt: Appointment) {    
     return this.bookingListRef.push({
       serial_number: apt.serial_number,
       name: apt.name,
@@ -26,7 +32,8 @@ export class AppointmentService {
       create_date:apt.create_date,
       expired_date:apt.expired_date,
       other:apt.other,
-      printed: false
+      printed: false,
+      order:this.order_number
     })
   }
   // Get Single
@@ -42,7 +49,9 @@ export class AppointmentService {
 
   // Get List
   getBookingList() {
-    this.bookingListRef = this.db.list('/appointment');
+    this.bookingListRef = this.db.list('/appointment', ref => {
+      return ref.orderByChild("order")
+    })
     return this.bookingListRef;
   }
 
@@ -82,5 +91,10 @@ export class AppointmentService {
     return this.bookingRef.update({
       printed: true
     })
+  }
+
+  updateOrder(order_number) {
+    var newOrder = { order: order_number }
+    firebase.database().ref("number/").update(newOrder)
   }
 }

@@ -12,4 +12,5 @@ export class Appointment {
     option: string;
     other:string;
     printed: boolean;
+    order:number;
 }

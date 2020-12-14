@@ -59,6 +59,8 @@ export class MakeAppointmentPage implements OnInit {
       this.aptService.createBooking(this.bookingForm.value).then(res => {
         console.log(res)
         this.bookingForm.reset();
+        this.aptService.order_number--;
+        this.aptService.updateOrder(this.aptService.order_number);
         this.router.navigate(['/home']);
       })
         .catch(error => console.log(error));

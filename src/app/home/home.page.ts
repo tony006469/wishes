@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
     let bookingRes = this.aptService.getBookingList();
     bookingRes.snapshotChanges().subscribe(res => {
       this.Bookings = [];
-      res.reverse().forEach(item => {
+      res.forEach(item => {
         let a = item.payload.toJSON();
         a['$key'] = item.key;
         a['option'] = this.obj2str(a['option'])

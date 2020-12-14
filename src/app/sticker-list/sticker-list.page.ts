@@ -43,7 +43,7 @@ export class StickerListPage implements OnInit {
     let bookingRes = this.aptService.getBookingList();
     bookingRes.snapshotChanges().subscribe(res => {
       this.Bookings = [];
-      res.reverse().forEach(item => {
+      res.forEach(item => {
         let a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Bookings.push(a as Appointment);
