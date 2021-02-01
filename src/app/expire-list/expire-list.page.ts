@@ -32,6 +32,7 @@ export class ExpireListPage implements OnInit {
       
         let expire_date = moment(a['expired_date']);
         let now_date = moment()
+        
         var diff_date = expire_date.diff(now_date, 'month')
         console.log(diff_date)
          if (diff_date <= 35){
@@ -70,7 +71,7 @@ export class ExpireListPage implements OnInit {
           { text: "親愛的點燈人，您好：", style: "content"},
           { text: "\u200B\u200B主內平安！", style: "content"},
           { text: "\u200B\u200B感謝您在聖嘉民朝聖地點亮光牆上的一盞小燈;在繽紛的光牆上，您所點亮的祈福平安燈有著天主滿滿的祝福，也帶給參訪者駐足讚嘆與無比感動!", style: "content"},
-          { text: "\u200B\u200B莊嚴的聖地因為有了繽紛的平安燈光牆更顯得無比寧靜與聖潔﹗謝謝您過去一年的支持，讓這盞充滿祝福的祈福燈一直亮著。由於您所奉獻的平安燈即將屆期，也邀請您 " + outbook.expired_date + " 之前，將款項(一年費用為新台幣壹仟元整)，以現金袋方式及填妥平安燈申請表，一併寄至聖嘉民朝聖地，好讓這盞充滿愛的小燈繼續閃亮一整年，感謝您!願", style: "content"},
+          { text: "\u200B\u200B莊嚴的聖地因為有了繽紛的平安燈光牆更顯得無比寧靜與聖潔﹗謝謝您過去一年的支持，讓這盞充滿祝福的祈福燈一直亮著。由於您所奉獻的平安燈即將屆期，也邀請您 " + moment().add(1, 'months').format('YYYY年MM月DD日') + " 之前，將款項(一年費用為新台幣壹仟元整)，以現金袋方式及填妥平安燈申請表，一併寄至聖嘉民朝聖地，好讓這盞充滿愛的小燈繼續閃亮一整年，感謝您!願", style: "content"},
           { text: "\u200B\u200B天主祝福\u200B您闔家平安喜樂", style: "content"},
           { text: "\u200B"},
           { text: "董事長 呂若瑟 神父 敬筆", style: "sign2"},
