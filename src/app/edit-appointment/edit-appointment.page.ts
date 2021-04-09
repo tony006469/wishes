@@ -38,6 +38,8 @@ export class EditAppointmentPage implements OnInit {
       other:[''],
       create_date:[''],
       expired_date:[''],
+      order:[''],
+      printed:[''],
     })
     console.log(this.updateBookingForm.value)
   }
