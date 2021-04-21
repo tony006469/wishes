@@ -79,39 +79,39 @@ export class PrintReceiptPage implements OnInit {
     this.option = this.strip(this.option, ",")
     var today = new Date();
     const documentDefinition = {
-      header: [
+      content: [
         {
           text: '財團法人天主教靈醫會 (聖嘉民朝聖地)',
+          fontSize: 20,
           alignment: 'center',
           style: 'header'
-        }
-      ],
-      content: [
+        },
         {
           columns: [
             {
               text: '          ',
-              fontSize: 22
+              fontSize: 20
             },
             {
               text: '收據',
               alignment: 'center',
-              fontSize: 22
+              fontSize: 20
             },
             {
               text: '聖嘉民' + this.receipt_number + '號',
-              // alignment: 'right',
-              fontSize: 20
+              alignment: 'right',
+              fontSize: 16
             },
           ], margin: [0, 5, 0, 10]
         },
+        { text: "\u200B"},
         {
           style: 'tableExample',
           table: {
             widths: ['*'],
             body: [
               [
-                { text: "\n" + '茲收到　　' + this.name + '　　君' + "\n" + "\n" + '地址：' + this.address + "\n" + "\n" + "\n" + "\n" }
+                { text: "\n" + '茲收到　　' + this.name + '　　君' + "\n" + "\n" + '地址：' + this.address + "\n" + "\n" + "\n" + "\n", fontSize:13 }
               ]
             ]
           }
