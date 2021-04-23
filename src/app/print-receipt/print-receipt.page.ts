@@ -111,7 +111,7 @@ export class PrintReceiptPage implements OnInit {
             widths: ['*'],
             body: [
               [
-                { text: "\n" + '茲收到　　' + this.name + '　　君' + "\n" + "\n" + '地址：' + this.address + "\n" + "\n" + "\n" + "\n", fontSize:13 }
+                { text: "\n" + '茲收到　　' + this.name + '　　君' + "\n" + "\n" + '郵遞區號：' + this.address_number + "\n" + "\n" + '地址：' + this.address + "\n" + "\n" + "\n" + "\n", fontSize:13 }
               ]
             ]
           }
@@ -130,7 +130,7 @@ export class PrintReceiptPage implements OnInit {
           table: {
             widths: ['*'],
             body: [
-              [{ text: "\n" + '備註：' + "\n" + "\n" + "\n" + "\n" + "\n" + "\n" }]
+              [{ text: "\n" + '備註：' + "\n" + "\n" + "\n" + "\n" + "\n" }]
             ]
           }
         },
