@@ -47,8 +47,7 @@ export class MakeAppointmentPage implements OnInit {
     // console.log(nowDate.toLocaleDateString())
     // console.log(endDate)
     // this.bookingForm.controls['create_date'].setValue(nowDate.toLocaleDateString())
-    // this.bookingForm.controls['expired_date'].setValue(endDate)    
-    this.disable = true
+    // this.bookingForm.controls['expired_date'].setValue(endDate)       
     var createDate = this.bookingForm.controls['create_date'].value
     var expireDate = this.bookingForm.controls['expired_date'].value
     var startDate = formatDate(createDate, 'yyyy/MM/dd', 'en-US')
@@ -59,6 +58,7 @@ export class MakeAppointmentPage implements OnInit {
       return false;
     } else {
       if (!this.disable) {
+        this.disable = true
         this.aptService.createBooking(this.bookingForm.value).then(res => {
           console.log(res)
           this.bookingForm.reset();
