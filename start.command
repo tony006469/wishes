@@ -1,2 +1,2 @@
 docker build . --tag wishes
-docker run -it --name wishes -p 888:80 wishes
+docker run --rm -d --name wishes -p 80:8100 wishes

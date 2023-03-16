@@ -6,11 +6,11 @@ COPY ./ /wishes
 
 WORKDIR /wishes
 
-RUN npm i -g @angular/cli @ionic/cli 
+RUN npm i -g @angular/cli @ionic/cli
 
 RUN npm install
 
 RUN ionic build
 
-CMD ["python3", "-m", "http.server", "--directory", "www", "80"]
+CMD ["ionic", "serve", "--external"]
 
