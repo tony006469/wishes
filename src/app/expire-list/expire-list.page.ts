@@ -74,7 +74,7 @@ export class ExpireListPage implements OnInit {
           { text: "\u200B\u200B莊嚴的聖地因為有了繽紛的平安燈光牆更顯得無比寧靜與聖潔﹗謝謝您過去一年的支持，讓這盞充滿祝福的祈福燈一直亮著。由於您所奉獻的平安燈即將屆期，也邀請您 " + moment().add(1, 'months').format('YYYY年MM月DD日') + " 之前，將款項(一年費用為新台幣壹仟元整)，以現金袋方式及填妥平安燈申請表，一併寄至聖嘉民朝聖地，好讓這盞充滿愛的小燈繼續閃亮一整年，感謝您!願", style: "content"},
           { text: "\u200B\u200B天主祝福\u200B您闔家平安喜樂", style: "content"},
           { text: "\u200B"},
-          { text: "董事長 呂若瑟 神父 敬筆", style: "sign2"},
+          { text: "聖嘉民朝聖地 主任司鐸 呂若瑟 神父 敬筆", style: "sign2"},
           { text: "\u200B"},
           { text: moment().format('YYYY年MM月DD日'), style: "sign2"},
           { text: "\u200B"},
