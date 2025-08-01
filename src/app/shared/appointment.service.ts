@@ -28,7 +28,7 @@ export class AppointmentService {
       address_number: apt.address_number,
       address: apt.address,
       money: apt.money,
-      option: apt.option,
+      option: apt.option || '',
       create_date:apt.create_date,
       expired_date:apt.expired_date,
       other:apt.other,
@@ -72,7 +72,7 @@ export class AppointmentService {
       address_number: apt.address_number,
       address: apt.address,
       money: apt.money,
-      option: apt.option,
+      option: apt.option || '',
       create_date:apt.create_date,
       expired_date:apt.expired_date,
       other:apt.other
