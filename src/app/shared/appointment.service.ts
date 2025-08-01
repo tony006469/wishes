@@ -18,23 +18,50 @@ export class AppointmentService {
     });
   }
 
+  private sanitizeAppointmentData(apt: Appointment): any {
+    const requiredFields = {
+      serial_number: '',
+      name: '',
+      email: '',
+      mobile: '',
+      address_number: '',
+      address: '',
+      money: '',
+      create_date: '',
+      expired_date: '',
+      option: '',
+      other: '',
+      printed: false,
+      order: this.order_number
+    };
+
+    let optionValue = '';
+    if (apt.option) {
+      if (Array.isArray(apt.option)) {
+        optionValue = apt.option.length > 0 ? apt.option.join(', ') : '';
+      } else {
+        optionValue = apt.option;
+      }
+    }
+
+    const sanitizedData = {
+      ...requiredFields,
+      ...apt,
+      option: optionValue
+    };
+
+    Object.keys(sanitizedData).forEach(key => {
+      if (typeof sanitizedData[key] === 'string' && (sanitizedData[key] === null || sanitizedData[key] === undefined)) {
+        sanitizedData[key] = '';
+      }
+    });
+    return sanitizedData;
+  }
+
   // Create
   createBooking(apt: Appointment) {    
-    return this.bookingListRef.push({
-      serial_number: apt.serial_number,
-      name: apt.name,
-      email: apt.email,
-      mobile: apt.mobile,
-      address_number: apt.address_number,
-      address: apt.address,
-      money: apt.money,
-      option: apt.option || '',
-      create_date:apt.create_date,
-      expired_date:apt.expired_date,
-      other:apt.other,
-      printed: false,
-      order:this.order_number
-    })
+    const sanitizedData = this.sanitizeAppointmentData(apt);
+    return this.bookingListRef.push(sanitizedData);
   }
   // Get Single
   getprint(id: string) {
@@ -64,19 +91,9 @@ export class AppointmentService {
 
   // Update
   updateBooking(id, apt: Appointment) {
-    return this.bookingRef.update({
-      serial_number: apt.serial_number,
-      name: apt.name,
-      email: apt.email,
-      mobile: apt.mobile,
-      address_number: apt.address_number,
-      address: apt.address,
-      money: apt.money,
-      option: apt.option || '',
-      create_date:apt.create_date,
-      expired_date:apt.expired_date,
-      other:apt.other
-    })
+    const sanitizedData = this.sanitizeAppointmentData(apt);
+    delete sanitizedData.order;
+    return this.bookingRef.update(sanitizedData);
   }
 
   // Delete
