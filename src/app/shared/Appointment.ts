@@ -9,7 +9,7 @@ export class Appointment {
     money: number;
     create_date: string;
     expired_date: string;
-    option: string;
+    option: string[] | string;
     other:string;
     printed: boolean;
     order:number;

@@ -18,7 +18,7 @@ export class AppointmentService {
     });
   }
 
-  private sanitizeAppointmentData(apt: Appointment): any {
+  private sanitizeAppointmentData(apt: any): any {
     const requiredFields = {
       serial_number: '',
       name: '',
@@ -35,12 +35,13 @@ export class AppointmentService {
       order: this.order_number
     };
 
-    let optionValue = '';
+
+    let optionValue: string[] | string = '';
     if (apt.option) {
       if (Array.isArray(apt.option)) {
-        optionValue = apt.option.length > 0 ? apt.option.join(', ') : '';
-      } else {
         optionValue = apt.option;
+      } else if (typeof apt.option === 'string' && apt.option.trim() !== '') {
+        optionValue = [apt.option];
       }
     }
 
@@ -51,7 +52,7 @@ export class AppointmentService {
     };
 
     Object.keys(sanitizedData).forEach(key => {
-      if (typeof sanitizedData[key] === 'string' && (sanitizedData[key] === null || sanitizedData[key] === undefined)) {
+      if (key !== 'option' && typeof sanitizedData[key] === 'string' && (sanitizedData[key] === null || sanitizedData[key] === undefined)) {
         sanitizedData[key] = '';
       }
     });
@@ -90,7 +91,7 @@ export class AppointmentService {
   }
 
   // Update
-  updateBooking(id, apt: Appointment) {
+  updateBooking(id: string, apt: Appointment) {
     const sanitizedData = this.sanitizeAppointmentData(apt);
     delete sanitizedData.order;
     return this.bookingRef.update(sanitizedData);
@@ -103,7 +104,7 @@ export class AppointmentService {
   }
 
   // Update sticker print state
-  updatePrintState(id, apt: Appointment) {
+  updatePrintState(id: string, apt: Appointment) {
     this.bookingRef = this.db.object('/appointment/' + id);
     return this.bookingRef.update({
       printed: true
