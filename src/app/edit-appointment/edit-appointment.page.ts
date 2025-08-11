@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { AppointmentService } from './../shared/appointment.service';
-import {formatDate} from '@angular/common';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { FormGroup, FormBuilder } from '@angular/forms'
+import { AppointmentService } from './../shared/appointment.service'
+import { formatDate } from '@angular/common'
 
 @Component({
   selector: 'app-edit-appointment',
@@ -10,8 +10,8 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./edit-appointment.page.scss'],
 })
 export class EditAppointmentPage implements OnInit {
-  updateBookingForm: FormGroup;
-  id: any;
+  updateBookingForm: FormGroup
+  id: any
 
   constructor(
     private aptService: AppointmentService,
@@ -19,10 +19,13 @@ export class EditAppointmentPage implements OnInit {
     private router: Router,
     public fb: FormBuilder
   ) {
-    this.id = this.actRoute.snapshot.paramMap.get('id');
-    this.aptService.getBooking(this.id).valueChanges().subscribe(res => {
-      this.updateBookingForm.setValue(res);
-    });
+    this.id = this.actRoute.snapshot.paramMap.get('id')
+    this.aptService
+      .getBooking(this.id)
+      .valueChanges()
+      .subscribe((res) => {
+        this.updateBookingForm.setValue(res)
+      })
   }
 
   ngOnInit() {
@@ -35,11 +38,11 @@ export class EditAppointmentPage implements OnInit {
       address: [''],
       money: [''],
       option: [''],
-      other:[''],
-      create_date:[''],
-      expired_date:[''],
-      order:[''],
-      printed:[''],
+      other: [''],
+      create_date: [''],
+      expired_date: [''],
+      order: [''],
+      printed: [''],
     })
     console.log(this.updateBookingForm.value)
   }
@@ -53,13 +56,19 @@ export class EditAppointmentPage implements OnInit {
     this.updateBookingForm.controls['expired_date'].setValue(endDate)
 
     if (!this.updateBookingForm.valid) {
-      return false;
+      alert('請檢查已填寫欄位是否正確！')
+      return false
     } else {
-      this.aptService.updateBooking(this.id, this.updateBookingForm.value)
-      .then(() => {
-        this.router.navigate(['/home']);
-      })
-      .catch(error => console.log(error));
-    }    
+      this.aptService
+        .updateBooking(this.id, this.updateBookingForm.value)
+        .then(() => {
+          console.log(this.updateBookingForm.value)
+          this.router.navigate(['/home'])
+        })
+        .catch((error) => {
+          console.log(error)
+          alert('資料建立失敗，請稍後再試！')
+        })
+    }
   }
 }
